@@ -1,0 +1,41 @@
+{
+  "format": "er-modeltool",
+  "version": 1,
+  "meta": { "modelName": "Universität", "studentName": "Max Muster", "className": "5AHIF", "studentId": "", "savedAt": "" },
+  "settings": { "namingConvention": "PascalCase" },
+  "logical": {
+    "entities": [
+      { "id": "person", "name": "Person", "position": { "x": 400, "y": 32 }, "attributes": [
+        { "id": "person-id", "name": "Id", "isPrimaryKey": true, "isOptional": false },
+        { "id": "person-name", "name": "Name", "isPrimaryKey": false, "isOptional": false },
+        { "id": "person-email", "name": "Email", "isPrimaryKey": false, "isOptional": true }
+      ] },
+      { "id": "student", "name": "Student", "position": { "x": 160, "y": 288 }, "attributes": [
+        { "id": "student-nr", "name": "MatrNr", "isPrimaryKey": false, "isOptional": false }
+      ] },
+      { "id": "teacher", "name": "Teacher", "position": { "x": 640, "y": 288 }, "attributes": [
+        { "id": "teacher-salary", "name": "Salary", "isPrimaryKey": false, "isOptional": true }
+      ] },
+      { "id": "course", "name": "Course", "position": { "x": 400, "y": 528 }, "attributes": [
+        { "id": "course-id", "name": "Id", "isPrimaryKey": true, "isOptional": false },
+        { "id": "course-title", "name": "Title", "isPrimaryKey": false, "isOptional": false }
+      ] },
+      { "id": "lesson", "name": "Lesson", "position": { "x": 720, "y": 704 }, "attributes": [
+        { "id": "lesson-nr", "name": "Nr", "isPrimaryKey": true, "isOptional": false },
+        { "id": "lesson-date", "name": "Date", "isPrimaryKey": false, "isOptional": false }
+      ] }
+    ],
+    "relationships": [
+      { "id": "r-enrolls", "sourceId": "student", "targetId": "course", "sourceCardinality": "zeroOrMany", "targetCardinality": "oneOrMany", "isIdentifying": false },
+      { "id": "r-teaches", "sourceId": "teacher", "targetId": "course", "sourceCardinality": "one", "targetCardinality": "zeroOrMany", "isIdentifying": false },
+      { "id": "r-lessons", "sourceId": "course", "targetId": "lesson", "sourceCardinality": "one", "targetCardinality": "oneOrMany", "isIdentifying": true }
+    ],
+    "generalizations": [
+      { "id": "g-person", "supertypeId": "person", "subtypeIds": ["student", "teacher"], "isComplete": true, "position": { "x": 480, "y": 208 } }
+    ],
+    "notes": [
+      { "id": "n1", "text": "Annahme: Jede Lehrveranstaltung hat genau eine Lehrperson.", "position": { "x": 32, "y": 560 }, "width": 224, "height": 80 }
+    ]
+  },
+  "physical": { "tables": [], "relationships": [], "notes": [] }
+}
